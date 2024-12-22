@@ -1,4 +1,15 @@
+import torch
+import torch.nn as nn
+from flask import Flask, request, jsonify
 
+# Define the same model architecture as in model.py
+class RecommendationModel(nn.Module):
+    def __init__(self):
+        super(RecommendationModel, self).__init__()
+        self.fc = nn.Linear(10, 1)
+
+    def forward(self, x):
+        return self.fc(x)
 # Load the trained model
 model = RecommendationModel()
 model.load_state_dict(torch.load("recommendation_model.pt", map_location=torch.device("cpu"), weights_only=True))
